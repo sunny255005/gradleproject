@@ -137,7 +137,7 @@ pipeline{
             steps {
                 script{
                  def getURL = readProperties file: '**/sonar/report-task.txt'
-                sh 'echo getURL'
+                    sh 'echo ${getURL}'
                 }
             }
           }
