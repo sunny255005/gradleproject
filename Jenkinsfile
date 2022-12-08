@@ -69,6 +69,7 @@ pipeline{
                 sh './gradlew test'
                 echo 'testing in progess...'
                  jacoco()
+                junit 'gradleproject/target/test-reports/*.xml'
             }
         }
         }
