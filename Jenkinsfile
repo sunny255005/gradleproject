@@ -7,6 +7,8 @@ pipeline{
         user_env_input = 'Development'
         is_unit_test_continue='No'
         is_sonarqube='No'
+        GIT_REPO_NAME = GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
+        
     }
     
     
@@ -20,7 +22,8 @@ pipeline{
     stages {
         stage('Which environment to build?') {
             steps {
-            sh 'echo which environment to build'       
+            sh 'echo which environment to build'      
+                
             }
         }
         stage('Confirm') {
@@ -102,28 +105,43 @@ pipeline{
      steps {
          echo "Hello,sonarqube continue...!"
             script {
+                def url = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
+                sh 'echo url'
                  withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonarqube-secret-token') {
                     
 
                      sh './gradlew sonarqube \
-  -Dsonar.projectKey=test \
+                     -Dsonar.projectName=${GIT_REPO_NAME} \
   -Dsonar.host.url=http://localhost:9000 \
--Dsonar.login=admin \
- -Dsonar.password=password  -Dsonar.buildbreaker.skip=false'
+      -Dsonar.projectKey=test  \
+'
+                     
 
                     
                 }
-//                         timeout(time: 2, unit: 'MINUTES') {
-//     def qualitygate = waitForQualityGate()
-//     if (qualitygate.status != "OK") {
-//         error "Pipeline aborted due to quality gate coverage failure."
-//     }
-// }
+            timeout(time: 10, unit: 'SECONDS') {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                    }
+                
+                        
+                        
+                    
             }
         }
+                }
+stage("finished")
+{
+    steps{
+        sh'echo finsihed'
+    }
+}
+
         }
       
         
     }
 
-}
+
