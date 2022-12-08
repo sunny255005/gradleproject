@@ -125,10 +125,11 @@ pipeline{
                         
                     
             }
+            waitForQualityGate abortPipeline:true
         }
-         steps{
-              waitForQualityGate abortPipeline:true
-          }
+       
+              
+          
                 }
 stage("finished")
 {
