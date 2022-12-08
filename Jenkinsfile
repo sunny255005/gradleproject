@@ -140,7 +140,7 @@ pipeline{
  def getURL = readProperties file: 'build/sonar/report-task.txt'
  //sh 'echo ${getURL}'
  sonarqubeURL = "${getURL['ceTaskUrl']}"
-response=`curl -k -s -X GET --url sonarqubeURL`
+response=sh 'curl -k -s -X GET --url sonarqubeURL'
 echo "${response}"
 
  echo "${sonarqubeURL }"
