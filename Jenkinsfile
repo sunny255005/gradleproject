@@ -137,7 +137,7 @@ pipeline{
                 steps{
                     script{
 
- def getURL = readProperties file: 'dir/my.properties'
+ def getURL = readProperties file: 'build/sonar/report-task.txt'
  sh 'echo ${getURL}'
 
 //   timeout(time: 1, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
