@@ -109,16 +109,16 @@ pipeline{
   -Dsonar.projectKey=test \
   -Dsonar.host.url=http://localhost:9000 \
 -Dsonar.login=admin \
- -Dsonar.password=password '
+ -Dsonar.password=password  -Dsonar.buildbreaker.skip=false'
 
                     
                 }
-                        timeout(time: 2, unit: 'MINUTES') {
-    def qualitygate = waitForQualityGate()
-    if (qualitygate.status != "OK") {
-        error "Pipeline aborted due to quality gate coverage failure."
-    }
-}
+//                         timeout(time: 2, unit: 'MINUTES') {
+//     def qualitygate = waitForQualityGate()
+//     if (qualitygate.status != "OK") {
+//         error "Pipeline aborted due to quality gate coverage failure."
+//     }
+// }
             }
         }
         }
