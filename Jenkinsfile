@@ -69,7 +69,7 @@ pipeline{
                 sh './gradlew test'
                 echo 'testing in progess...'
                  jacoco()
-             junit '**/test-results/test/*.xml'
+           //  junit '**/test-results/test/*.xml'
             }
         }
         }
@@ -135,7 +135,7 @@ pipeline{
           
                  stage("Quality Gate") {
             steps {
-             timeout(time: 10, unit: 'SECONDS') {
+             timeout(time: 100, unit: 'SECONDS') {
                waitForQualityGate abortPipeline: true
               }
             }
