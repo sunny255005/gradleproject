@@ -135,7 +135,9 @@ pipeline{
           
                  stage("Quality Gate") {
             steps {
-             timeout(time: 0, unit: 'SECONDS') {
+                 def getURL = readProperties file: './target/sonar/report-task.txt
+                sh 'echo getURL'
+             timeout(time:100, unit: 'SECONDS') {
                waitForQualityGate abortPipeline: true
               }
             }
