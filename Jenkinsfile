@@ -128,7 +128,7 @@ pipeline{
           
         }
                 }
-       sleep 5
+      
 stage("Quality Gate") {
         timeout(time: 10, unit: 'SECONDS') { 
             def qg = waitForQualityGate() 
