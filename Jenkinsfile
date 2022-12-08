@@ -119,12 +119,9 @@ pipeline{
 
                     
                 }
-            timeout(time: 10, unit: 'SECONDS') {
-                        def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                        }
-                    }
+          steps{
+              waitForQualityGate abortPipeline:true
+          }
                 
                         
                         
