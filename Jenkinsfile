@@ -139,7 +139,10 @@ pipeline{
 
  def getURL = readProperties file: 'build/sonar/report-task.txt'
  //sh 'echo ${getURL}'
- sonarqubeURL = "${getURL['dashboardUrl']}"
+ sonarqubeURL = "${getURL['ceTaskUrl']}"
+response=`curl -k -s -X GET --url sonarqubeURL`
+echo "${response}"
+
  echo "${sonarqubeURL }"
 //   timeout(time: 1, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
 //     def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
