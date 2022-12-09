@@ -1,4 +1,4 @@
-
+import groovy.json.JsonSlurper
 
 pipeline{
     environment {
@@ -16,7 +16,7 @@ pipeline{
     agent any
     tools { 
        gradle'gradle7' 
-        def jsonParser = new JsonSlurper()
+     
        
     } 
    
