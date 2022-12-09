@@ -69,7 +69,8 @@ pipeline{
                 sh './gradlew test'
                 echo 'testing in progess...'
                  jacoco()
-             junit '**/test-results/test/*.xml'
+             //junit ''
+                junit testResults: '**/test-results/test/*.xml', skipPublishingChecks: true
             }
         }
         }
