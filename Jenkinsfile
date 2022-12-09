@@ -16,6 +16,7 @@ pipeline{
     agent any
     tools { 
        gradle'gradle7' 
+        def jsonParser = new JsonSlurper()
        
     } 
    
