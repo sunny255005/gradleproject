@@ -180,7 +180,7 @@ if (reportTaskFileExists) {
 // //   }
 //   }
 // }
-            }
+            
 stage("finished")
 {
     steps{
@@ -189,6 +189,7 @@ stage("finished")
 }
 
         }
+}
 
         
     
