@@ -147,7 +147,7 @@ if (reportTaskFileExists) {
         sleep 20
         def taskStatusResult    =
             sh(returnStdout: true,
-               script: "curl -s -X GET -u ${authString} \'${sonarProps['sonar.host.url']}/api/ce/task?id=${taskProps['ceTaskId']}\'")
+               script: "curl -s -X GET -u admin:admin \'${sonarProps['sonar.host.url']}/api/ce/task?id=${taskProps['ceTaskId']}\'")
             echo "taskStatusResult[${taskStatusResult}]"
         def taskStatus  = new JsonSlurper().parseText(taskStatusResult).task.status
         echo "taskStatus[${taskStatus}]"
