@@ -8,6 +8,7 @@ pipeline{
         is_unit_test_continue='No'
         is_sonarqube='No'
         GIT_REPO_NAME = GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
+        SONARQUBE_SECRET_TOKEN_PROJECT_SPECIFIC=credentials('sonarqube-secret-token')
         
     }
     
@@ -55,7 +56,7 @@ pipeline{
                     
                    
                     is_unit_test_continue=is_unit_test_continue_parameter
-
+                   sh 'echo ${SONARQUBE_SECRET_TOKEN_PROJECT_SPECIFIC}'
 
                   
 
